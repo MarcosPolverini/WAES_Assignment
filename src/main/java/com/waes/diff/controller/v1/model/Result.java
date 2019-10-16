@@ -11,7 +11,7 @@ import java.util.Set;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Result {
 
-    private final Boolean equal;
+    private final Boolean equalData;
 
     private final Boolean differentSize;
 

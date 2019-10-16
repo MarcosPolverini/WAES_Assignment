@@ -62,7 +62,7 @@ public final class DiffController {
         return Result.builder()
                 .differentPositions(positions)
                 .differentSize(diffResult.getDifferentSize())
-                .equal(diffResult.getEqual())
+                .equalData(diffResult.getEqualData())
                 .build();
     }
 }

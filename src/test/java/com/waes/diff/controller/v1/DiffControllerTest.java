@@ -30,14 +30,22 @@ public class DiffControllerTest extends WebTest {
     }
 
     @Test
-    @SneakyThrows
     public void it_should_get_differences() {
-        sendAndAssertPost("left", "SOME TEXT ADD");
-        sendAndAssertPost("right", "TEXT ADD SOME");
-        getMvc().perform(get("/v1/diff/1").contentType(MediaType.TEXT_HTML_VALUE))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-                .andExpect(content().string(createCompareJson()));
+        val positions = IntStream.range(0, 13).filter(i -> i != 4).boxed().collect(Collectors.toSet());
+        val res = Result.builder().differentPositions(positions).build();
+        sendFullPositiveTest("SOME TEXT ADD", "TEXT ADD SOME", res);
+    }
+
+    @Test
+    public void it_should_return_equal() {
+        val res = Result.builder().equalData(true).build();
+        sendFullPositiveTest("SOME TEXT ADD", "SOME TEXT ADD", res);
+    }
+
+    @Test
+    public void it_should_return_different_size() {
+        val res = Result.builder().differentSize(true).build();
+        sendFullPositiveTest("SOME TEXT ADD A ", "SOME TEXT ADD", res);
     }
 
     @Test
@@ -45,6 +53,7 @@ public class DiffControllerTest extends WebTest {
         sendAndValidateNonBase64("left");
         sendAndValidateNonBase64("right");
     }
+
 
     @Test
     @SneakyThrows
@@ -79,10 +88,14 @@ public class DiffControllerTest extends WebTest {
         ).andExpect(status().isCreated());
     }
 
-    private String createCompareJson() {
-        val positions = IntStream.range(0, 13).filter(i -> i != 4).boxed().collect(Collectors.toSet());
-        val res = Result.builder().differentPositions(positions).build();
-        return toJson(res);
+    @SneakyThrows
+    private void sendFullPositiveTest(final String left, final String right, final Result expected) {
+        sendAndAssertPost("left", left);
+        sendAndAssertPost("right", right);
+        getMvc().perform(get("/v1/diff/1").contentType(MediaType.TEXT_HTML_VALUE))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(content().string(toJson(expected)));
     }
 
     private String getUrl(final String path) {

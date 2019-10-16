@@ -10,7 +10,7 @@ import lombok.Value;
 @Builder
 public final class DiffResult {
 
-    private final Boolean equal;
+    private final Boolean equalData;
 
     private final Boolean differentSize;
 

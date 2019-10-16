@@ -15,32 +15,22 @@ class DiffCalculatorImp implements DiffCalculator {
         if (!bucket.isValid()) {
             throw new DiffException(String.format("Right and Left need to be filled for ID %d", bucket.getId()));
         }
-        if (!isEqualSize(bucket)) {
+        if (bucket.getRight().length() != bucket.getLeft().length()) {
             return DiffResult.builder().differentSize(true).build();
-        }
-        if (isEqual(bucket)) {
-            return DiffResult.builder().equal(true).build();
         }
         return getDiffs(bucket);
     }
 
     private DiffResult getDiffs(final DiffBucket bucket) {
-        val builder = DiffResult.builder();
+        val builder = DiffResult.builder().equalData(true);
         val left = bucket.getLeft().toCharArray();
         val right = bucket.getRight().toCharArray();
         for (int i = 0; i < left.length; i++) {
             if (left[i] != right[i]) {
                 builder.addPosition(i);
+                builder.equalData(null);
             }
         }
         return builder.build();
-    }
-
-    private boolean isEqual(final DiffBucket bucket) {
-        return bucket.getRight().equals(bucket.getLeft());
-    }
-
-    private boolean isEqualSize(final DiffBucket bucket) {
-        return bucket.getRight().length() == bucket.getLeft().length();
     }
 }

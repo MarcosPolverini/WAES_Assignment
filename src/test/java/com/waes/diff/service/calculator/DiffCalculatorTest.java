@@ -27,7 +27,7 @@ public class DiffCalculatorTest extends BeanTest {
 
     @Test
     public void it_should_return_equals() {
-        execute("sample text", "sample text", DiffResult.builder().equal(true).build());
+        execute("sample text", "sample text", DiffResult.builder().equalData(true).build());
     }
 
     @Test
