@@ -2,6 +2,7 @@
 The Waes Assignment.
 
 This implementation use in memory H2 database, if you restar the application you will lose all data.
+The service use port 8000.
 
 Requirements
 ======
