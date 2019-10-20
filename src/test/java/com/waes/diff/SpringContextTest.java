@@ -7,10 +7,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class DiffApplicationTests {
+public class SpringContextTest {
 
     @Test
-    public void contextLoads() {
+    public void should_load_spring_context() {
     }
 
 }
