@@ -3,29 +3,36 @@ package com.waes.diff.model;
 import lombok.val;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class DiffBucketTest {
 
     @Test
     public void it_should_return_valid() {
-        val test = DiffBucket.builder().left("sample").right("xxxx").build();
+        val test = new DiffBucket();
+        test.setLeft("sample");
+        test.setRight("xxxx");
         assertTrue(test.isValid());
     }
 
     @Test
     public void it_should_return_invalid_all_blank() {
-        assertFalse(DiffBucket.builder().build().isValid());
+        assertFalse(new DiffBucket().isValid());
     }
 
     @Test
     public void it_should_return_invalid_right_blank() {
-        assertFalse(DiffBucket.builder().left("sample").build().isValid());
+        val test = new DiffBucket();
+        test.setLeft("sample");
+        assertFalse(test.isValid());
     }
 
     @Test
     public void it_should_return_invalid_left_blank() {
-        assertFalse(DiffBucket.builder().right("xxxx").build().isValid());
+        val test = new DiffBucket();
+        test.setRight("xxxx");
+        assertFalse(test.isValid());
     }
 
 }
