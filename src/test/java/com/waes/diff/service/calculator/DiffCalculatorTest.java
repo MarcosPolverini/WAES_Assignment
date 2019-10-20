@@ -1,19 +1,17 @@
 package com.waes.diff.service.calculator;
 
-import com.waes.diff.BeanTest;
+import com.waes.diff.MockedTests;
 import com.waes.diff.infra.DiffException;
 import com.waes.diff.model.DiffBucket;
 import com.waes.diff.model.DiffResult;
 import lombok.val;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.junit.Assert.assertEquals;
 
-public class DiffCalculatorTest extends BeanTest {
+public class DiffCalculatorTest extends MockedTests {
 
-    @Autowired
-    private DiffCalculator calculator;
+    private final DiffCalculator calculator = new DiffCalculatorImp();
 
     @Test(expected = NullPointerException.class)
     public void it_should_throws_exception_null_bucket() {
@@ -22,7 +20,7 @@ public class DiffCalculatorTest extends BeanTest {
 
     @Test(expected = DiffException.class)
     public void it_should_thorws_exception_invalid_bucket() {
-        calculator.doCalculate(DiffBucket.builder().build());
+        calculator.doCalculate(new DiffBucket());
     }
 
     @Test
@@ -41,7 +39,9 @@ public class DiffCalculatorTest extends BeanTest {
     }
 
     private void execute(final String left, final String right, final DiffResult expected) {
-        val bucket = DiffBucket.builder().left(left).right(right).build();
+        val bucket = new DiffBucket();
+        bucket.setRight(right);
+        bucket.setLeft(left);
         assertEquals(expected, calculator.doCalculate(bucket));
     }
 

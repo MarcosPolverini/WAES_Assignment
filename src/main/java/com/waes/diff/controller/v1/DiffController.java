@@ -8,20 +8,20 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import lombok.RequiredArgsConstructor;
 import lombok.val;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
-@RequestMapping(path = "/v1/diff/{id}", produces = APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(path = "/v1/diff/{id}", produces = APPLICATION_JSON_VALUE)
 @Api(value = "Diff Calculator System")
+@RequiredArgsConstructor
 public final class DiffController {
 
-    @Autowired
-    private DiffService service;
+    private final DiffService service;
 
     @PostMapping("/left")
     @ResponseStatus(HttpStatus.CREATED)
@@ -47,7 +47,7 @@ public final class DiffController {
 
     @GetMapping
     @ResponseBody
-    @ApiOperation(value = "Process and return the differences in left and right", response = Result.class, produces = APPLICATION_JSON_UTF8_VALUE)
+    @ApiOperation(value = "Process and return the differences in left and right", response = Result.class, produces = APPLICATION_JSON_VALUE)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully differences from left and right"),
             @ApiResponse(code = 404, message = "Error no such data"),

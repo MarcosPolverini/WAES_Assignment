@@ -6,8 +6,8 @@ import lombok.Value;
 
 import java.util.Set;
 
-@Builder
 @Value
+@Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Result {
 

@@ -8,7 +8,7 @@ import lombok.val;
 import org.springframework.stereotype.Component;
 
 @Component
-class DiffCalculatorImp implements DiffCalculator {
+public final class DiffCalculatorImp implements DiffCalculator {
 
     @Override
     public DiffResult doCalculate(@NonNull final DiffBucket bucket) {

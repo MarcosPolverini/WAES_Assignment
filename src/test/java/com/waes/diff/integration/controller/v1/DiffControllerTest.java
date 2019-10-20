@@ -1,6 +1,6 @@
-package com.waes.diff.controller.v1;
+package com.waes.diff.integration.controller.v1;
 
-import com.waes.diff.WebTest;
+import com.waes.diff.integration.controller.WebTest;
 import com.waes.diff.controller.v1.model.DiffRequest;
 import com.waes.diff.controller.v1.model.Result;
 import lombok.SneakyThrows;
@@ -69,7 +69,7 @@ public class DiffControllerTest extends WebTest {
         req.setData("NON BASE64");
         val rs = getMvc().perform(post(getUrl(path))
                 .content(toJson(req))
-                .contentType(MediaType.APPLICATION_JSON_UTF8))
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is(400));
     }
 
@@ -84,7 +84,7 @@ public class DiffControllerTest extends WebTest {
         val content = createJson(value);
         getMvc().perform(post(getUrl(path))
                 .content(content)
-                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(status().isCreated());
     }
 
@@ -94,7 +94,7 @@ public class DiffControllerTest extends WebTest {
         sendAndAssertPost("right", right);
         getMvc().perform(get("/v1/diff/1").contentType(MediaType.TEXT_HTML_VALUE))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(content().string(toJson(expected)));
     }
 
