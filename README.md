@@ -1,3 +1,5 @@
+[![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=MarcosPolverini_WAES_Assignment)](https://sonarcloud.io/dashboard?id=MarcosPolverini_WAES_Assignment)
+
 # WAES Assignment
 The Waes Assignment.
 
