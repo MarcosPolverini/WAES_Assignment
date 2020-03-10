@@ -25,5 +25,3 @@ API Documentation
 ======
 After start server go to `http:\\localhost:8000\swagger-ui.html`
 
-
-Testing Sonar
