@@ -15,6 +15,9 @@
     <description>WAES Assignment</description>
 
     <properties>
+        <sonar.projectKey>MarcosPolverini_WAES_Assignment</sonar.projectKey>
+        <sonar.organization>marcospolverini</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <java.version>11</java.version>
         <io.springfox.version>2.9.2</io.springfox.version>
         <com.h2database.version>1.4.200</com.h2database.version>
